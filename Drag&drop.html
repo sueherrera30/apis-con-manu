@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>drag and drop</title>
+    <style media="screen">
+      .cuadro{
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="http://dummyimage.com/100x100"  draggable="true" alt="cuadro" id="imagen">
+    <div class="cuadro" id="destino"> </div>
+
+    <script type="text/javascript">
+      var imagen = document.getElementById('imagen');
+      var destino = document.getElementById("destino");
+
+      imagen.addEventListener("dragstart",iniciarDrag);
+      destino.addEventListener("dragover", manejarDrag);
+      destino.addEventListener("drop", soltarElemento);
+
+      function iniciarDrag() {
+          this.style.opacity = "0.3";
+          event.dataTransfer.setData("idImagen",event.target.id)
+      }
+
+      function manejarDrag() {
+        event.preventDefault();
+      }
+
+      function soltarElemento() {
+        var idImagen = event.dataTransfer.getData("idImagen");
+        event.target.appendChild(document.getElementById(idImagen));
+      }
+    </script>
+  </body>
+</html>
